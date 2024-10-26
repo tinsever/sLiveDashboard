@@ -37,11 +37,11 @@
                 </button>
             {/if}
         </div>
-        <div class="pt-6">
+        <div class="pt-6 text-white/50">
             <NavComponent
                 icon="home"
                 path="/dashboard"
-                name="Your Channeltest"
+                name="Your Channel"
                 isFirst="true"
                 current={currentPath === "/dashboard" ? "true" : "false"}
             />

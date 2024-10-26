@@ -1,13 +1,11 @@
-// See https://svelte.dev/docs/kit/types#app.d.ts
-// for information about these interfaces
-declare global {
-	namespace App {
-		// interface Error {}
-		// interface Locals {}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
-	}
-}
+// src/types/app.d.ts
+import type { UserData } from "./types/UserData"; // Adjust the import path as necessary
 
-export {};
+declare global {
+  declare namespace App {
+    interface Locals {
+      authToken?: string | null; // This is for your auth token
+      user?: UserData | null; // Include UserData in the locals
+    }
+  }
+}

@@ -9,17 +9,14 @@
 
 <a href={path} class="no-underline">
     <div
-        class="flex text-white/50 items-center pl-6 hover:cursor-pointer hover:text-sl fill-white hover:fill-sl transition-all border-l-4"
+        class="flex items-center pl-6 hover:cursor-pointer hover:!text-sl fill-white hover:fill-sl transition-all border-l-4"
         class:mt-6={isFirst !== "true"}
         class:border-sl={current === "true"}
         class:border-kai={current !== "true"}
+        class:text-white={current === "true"}
     >
         <Icons {icon} className="h-6 w-auto" />
-        <p
-            class="font-semibold ml-4 hover:text-sl {current === 'true'
-                ? 'text-white'
-                : 'text-white/50'}"
-        >
+        <p class="font-semibold ml-4">
             {name}
         </p>
     </div>
