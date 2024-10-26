@@ -2,6 +2,10 @@
     import Icons from "$lib/Icons.svelte";
 </script>
 
+<svelte:head>
+    <title>sLive</title>
+</svelte:head>
+
 <div
     class="flex flex-col justify-center items-center h-screen bg-gradient-to-b from-[#0f0e14] to-[#1c1a24] text-white gap-5 text-center"
 >

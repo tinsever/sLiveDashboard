@@ -6,4 +6,8 @@
     export let data; // Benutzerdaten von der Server-Seite
 </script>
 
+<svelte:head>
+    <title>sLive | Dash</title>
+</svelte:head>
+
 <UserInfoBlock {data} />
