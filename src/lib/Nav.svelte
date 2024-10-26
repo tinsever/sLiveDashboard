@@ -41,7 +41,7 @@
             <NavComponent
                 icon="home"
                 path="/dashboard"
-                name="Your Channel"
+                name="Your Channeltest"
                 isFirst="true"
                 current={currentPath === "/dashboard" ? "true" : "false"}
             />
