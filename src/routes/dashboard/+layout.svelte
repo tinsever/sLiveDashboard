@@ -40,7 +40,9 @@
     const imgUrl = data.data.twitch.user.pb;
 </script>
 
-<div class="grid grid-cols-1 md:grid-cols-5 bg-kai text-white font-sans">
+<div
+    class="grid grid-cols-1 md:grid-cols-5 bg-gradient-to-b from-kai to-[#1c1a24] text-white font-sans"
+>
     <Nav {isNavVisible} {smallScreen} />
     <div
         class="col-span-1 md:col-span-4"
