@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PORT=3000
+PORT=5100
 PROJECT_DIR="/root/sLiveDashboard"
 BRANCH="main"
 APP_NAME="slivedash"
