@@ -11,7 +11,7 @@ export default {
       colors: {
         kai: "#0f0e14",
         lkai: "#1f1d29",
-        sl: "#6365ea",
+        sl: "#28bcfa",
       },
       fontFamily: {
         sans: ['"Basier Square"', "sans-serif"],
