@@ -1,0 +1,28 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to your main branch name
+  pull_request:
+    branches:
+      - main  # Adjust this to your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build the Docker image
+        run: |
+          docker build -t slive-svelte:latest .
+
+      - name: List Docker images (optional)
+        run: |
+          docker images
