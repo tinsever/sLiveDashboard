@@ -1,23 +1,35 @@
-# Use the official Node.js 20 image
-FROM node:20
+# Build stage
+FROM node:20-alpine AS builder
 
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json for installing dependencies
-COPY package.json package-lock.json ./
+# Copy package files
+COPY package*.json ./
 
-# Install dependencies with npm ci
+# Install dependencies
 RUN npm ci
 
-# Copy the rest of the application code
+# Copy all other source code files
 COPY . .
 
 # Build the application
 RUN npm run build
 
-# Set the build output directory as the working directory
-WORKDIR /app/build
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy built assets and package files from builder
+COPY --from=builder /app/build build/
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/package-lock.json ./
+
+# Install only production dependencies
+RUN npm ci --production
+
+# Expose the port the app will run on (adjust if needed)
+EXPOSE 3000
 
 # Start the application
-CMD ["node", "index.js"]
+CMD ["node", "build"]
