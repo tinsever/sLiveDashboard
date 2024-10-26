@@ -1,9 +1,7 @@
 import { redirect } from "@sveltejs/kit";
+import { TWITCH_CLIENT_ID, TWITCH_REDIRECT_URI } from "$env/static/private";
 
 export async function GET() {
-  // Hardcoded for testing purposes
-  const clientId = "s9il8b3uvhyo99hy4hixr4pdevus8z";
-  const redirectUri = "http://localhost:5173/auth/callback";
   const scopes = [
     "user:read:chat",
     "moderator:read:followers",
