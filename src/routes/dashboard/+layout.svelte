@@ -35,7 +35,7 @@
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-5 bg-kai text-white font-sans">
-    <Nav {isNavVisible} />
+    <Nav {isNavVisible} {smallScreen} />
     <div
         class="col-span-1 md:col-span-4"
         class:hidden={$smallScreen && $isNavVisible}
