@@ -1,6 +1,7 @@
 // src/hooks.server.ts
 import type { Handle } from "@sveltejs/kit";
 import { error } from "@sveltejs/kit";
+import { API_URL } from "$env/static/private";
 
 export const handle: Handle = async ({ event, resolve }) => {
   // Retrieve the auth token from cookies, if it exists
@@ -10,7 +11,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   // Fetch user data if the token exists
   if (authToken) {
     try {
-      const response = await fetch("https://apibeta.slive.app/me", {
+      const response = await fetch(API_URL + "/me", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${authToken}`,
