@@ -28,8 +28,12 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            NODE_ENV=production
+            TWITCH_CLIENT_ID=${{ secrets.TWITCH_CLIENT_ID }}
+            TWITCH_REDIRECT_URI=${{ secrets.TWITCH_REDIRECT_URI }}
 
       - name: Test the image
         run: |
-          docker run --rm slive-svelte:latest node -e 'console.log("Node.js version:", process.version)'
+          docker run --rm \
+            -e TWITCH_CLIENT_ID=${{ secrets.TWITCH_CLIENT_ID }} \
+            -e TWITCH_REDIRECT_URI=${{ secrets.TWITCH_REDIRECT_URI }} \
+            slive-svelte:latest node -e 'console.log("Node.js version:", process.version)'
