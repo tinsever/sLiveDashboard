@@ -40,16 +40,18 @@
     const imgUrl = data.data.twitch.user.pb;
 </script>
 
-<div
-    class="grid grid-cols-1 md:grid-cols-5 bg-gradient-to-b from-kai to-[#1c1a24] text-white font-sans"
->
+<div class="grid grid-cols-1 md:grid-cols-5 text-white font-sans">
     <Nav {isNavVisible} {smallScreen} />
     <div
         class="col-span-1 md:col-span-4"
         class:hidden={$smallScreen && $isNavVisible}
     >
-        <Head {toggleNav} imageUrl={imgUrl} />
-        <div class="min-h-screen overflow-auto p-6">
+        <Head
+            {toggleNav}
+            imageUrl={imgUrl}
+            status={data.data.twitch.stream.status}
+        />
+        <div class="min-h-full overflow-auto p-6">
             {@render children()}
         </div>
     </div>

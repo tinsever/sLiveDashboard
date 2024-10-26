@@ -9,6 +9,7 @@ export default {
     extend: {
       colors: {
         kai: "#0f0e14",
+        lkai: "#1f1d29",
         sl: "#6365ea",
       },
       fontFamily: {

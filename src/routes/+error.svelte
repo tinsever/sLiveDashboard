@@ -1,5 +1,6 @@
 <script lang="ts">
     import { browser } from "$app/environment";
+    import { page } from "$app/stores";
     function nav_back() {
         if (browser) window.history.back();
     }
@@ -14,6 +15,7 @@
             wirklich gibt.
         </p>
     </div>
+    <p>Fehler: {$page.error?.message}</p>
     <div id="links">
         <a on:click={nav_back}>Zurück</a>
     </div>

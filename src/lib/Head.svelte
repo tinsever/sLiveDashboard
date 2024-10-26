@@ -1,7 +1,16 @@
 <script lang="ts">
+    import LivePulse from "./LivePulse.svelte";
+    import Icons from "./Icons.svelte";
+
     // Props
     export let toggleNav;
     export let imageUrl: string;
+    export let status: string;
+    let tooltipVisible = false;
+
+    function toggleTooltip() {
+        tooltipVisible = !tooltipVisible;
+    }
 </script>
 
 <div
@@ -13,27 +22,37 @@
             on:click={toggleNav}
             class="focus:outline-none md:hidden"
         >
-            <!-- Add your SVG here and attach the click event -->
-            <svg
-                class="fill-white/50 h-7 w-auto cursor-pointer"
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="100"
-                height="100"
-                viewBox="0 0 64 64"
-            >
-                <path
-                    d="M51 46c1.104 0 2 .895 2 2 0 1.105-.896 2-2 2-.601 0-37.399 0-38 0-1.104 0-2-.895-2-2 0-1.105.896-2 2-2C13.601 46 50.399 46 51 46zM51 30c1.104 0 2 .895 2 2 0 1.105-.896 2-2 2-.601 0-37.399 0-38 0-1.104 0-2-.895-2-2 0-1.105.896-2 2-2C13.601 30 50.399 30 51 30zM51 14c1.104 0 2 .895 2 2 0 1.105-.896 2-2 2-.601 0-37.399 0-38 0-1.104 0-2-.895-2-2 0-1.105.896-2 2-2C13.601 14 50.399 14 51 14z"
-                ></path>
-            </svg>
+            <Icons
+                icon="menu"
+                className="fill-white/50 h-7 w-auto cursor-pointer"
+            />
         </button>
     </div>
-    <div>
-        <img
-            src={imageUrl}
-            alt="Profile"
-            class="bg-white/20 h-9 rounded-full border-2 p-[0.08rem] border-white/50"
-        />
+    <div class="flex items-center gap-4 relative">
+        {#if status === "live"}
+            <LivePulse />
+        {/if}
+        <button
+            type="button"
+            class="bg-white/20 h-9 rounded-full border-2 p-[0.08rem] border-white/50 cursor-pointer focus:outline-none"
+            on:click={toggleTooltip}
+        >
+            <img
+                src={imageUrl}
+                alt="Profile"
+                class="h-full w-full rounded-full"
+            />
+        </button>
+        {#if tooltipVisible}
+            <div
+                class="absolute top-8 right-0 mt-2 w-32 bg-lkai border border-white/10 text-white p-2 rounded shadow-lg"
+            >
+                <button
+                    class="w-full text-left hover:text-red-400 focus:outline-none"
+                >
+                    Logout
+                </button>
+            </div>
+        {/if}
     </div>
 </div>
