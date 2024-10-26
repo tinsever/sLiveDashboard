@@ -17,7 +17,7 @@ export async function GET() {
   ].join(" ");
 
   // Encode the scopes and construct the authorization URL
-  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${encodeURIComponent(scopes)}`;
+  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(TWITCH_REDIRECT_URI)}&response_type=code&scope=${encodeURIComponent(scopes)}`;
 
   // Redirect to the Twitch authorization URL
   throw redirect(302, authUrl);

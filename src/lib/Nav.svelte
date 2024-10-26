@@ -12,8 +12,6 @@
     let currentPath: string;
     $: currentPath = $page.url.pathname;
 
-    console.log(currentPath);
-
     function closeNav() {
         isNavVisible.update((value) => !value);
     }

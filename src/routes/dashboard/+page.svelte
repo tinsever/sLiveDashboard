@@ -4,8 +4,6 @@
     import UserInfoBlock from "$lib/UserInfoBlock.svelte";
 
     export let data; // Benutzerdaten von der Server-Seite
-
-    console.log(data);
 </script>
 
 <UserInfoBlock {data} />
