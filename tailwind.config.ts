@@ -12,7 +12,7 @@ export default {
         sl: "#6365ea",
       },
       fontFamily: {
-        sans: ['"Basier Circle"', "sans-serif"],
+        sans: ['"Basier Square"', "sans-serif"],
       },
     },
   },
