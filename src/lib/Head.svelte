@@ -1,6 +1,7 @@
 <script lang="ts">
     import LivePulse from "./LivePulse.svelte";
     import Icons from "./Icons.svelte";
+    import { goto } from "$app/navigation";
 
     // Props
     export let toggleNav;
@@ -10,6 +11,10 @@
 
     function toggleTooltip() {
         tooltipVisible = !tooltipVisible;
+    }
+
+    function logout() {
+        goto("/auth/logout");
     }
 </script>
 
@@ -49,6 +54,7 @@
             >
                 <button
                     class="w-full text-left hover:text-red-400 focus:outline-none"
+                    on:click={logout}
                 >
                     Logout
                 </button>
