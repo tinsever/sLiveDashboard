@@ -1,44 +1,22 @@
-<script lang="ts">
-    import { browser } from "$app/environment";
-    import { page } from "$app/stores";
-    function nav_back() {
-        if (browser) window.history.back();
-    }
+<script>
+    import Icons from "$lib/Icons.svelte";
 </script>
 
-<div id="errorpage">
+<div
+    class="flex flex-col justify-center items-center h-screen bg-gradient-to-b from-[#0f0e14] to-[#1c1a24] text-white gap-5 text-center"
+>
     <img src="/logo.png" alt="SLIVE Logo" class="w-auto h-56" />
     <div id="infotext">
-        <p>Willkommen auf dem Dashboard von sLive!</p>
+        <p class="text-2xl font-semibold">
+            Willkommen auf dem Dashboard von sLive!
+        </p>
+        <a href="/auth/login">
+            <div
+                class="flex gap-4 items-center bg-lkai p-4 rounded-xl border border-white/10 justify-center fill-sl text-sl mt-4 hover:bg-lkai/60 transition-all cursor-pointer"
+            >
+                <Icons icon="twitch" className="h-8 w-auto" />
+                <p class="font-semibold text-lg -mt-1">Login using Twitch.tv</p>
+            </div>
+        </a>
     </div>
 </div>
-
-<style>
-    #errorpage {
-        display: flex;
-        flex-direction: column; /* Stacks items vertically */
-        justify-content: center; /* Centers items horizontally */
-        align-items: center; /* Centers items vertically */
-        height: 100vh;
-        background: linear-gradient(to bottom, #0f0e14, #1c1a24);
-        color: white;
-        gap: 20px; /* Adds space between items */
-        text-align: center;
-    }
-
-    #infotext p {
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-
-    #links {
-        display: flex;
-        gap: 10px; /* Adds space between links */
-    }
-
-    a {
-        font-size: 1.25rem;
-        text-decoration: wavy underline;
-        cursor: pointer;
-    }
-</style>
