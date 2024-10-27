@@ -6,7 +6,7 @@
 
 <Block
     flex={true}
-    className="p-4 hover:bg-lkai/10 transition-all duration-500 hover:duration-150 hover:border-white/25"
+    className="p-4 hover:bg-lkai/10 hover:scale-[100.5%] transform transition-all duration-600 hover:duration-250 hover:border-white/25"
 >
     <img
         src={user.twitch.user.pb}

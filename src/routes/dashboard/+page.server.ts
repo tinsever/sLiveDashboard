@@ -6,7 +6,7 @@ export async function load({ locals }) {
 
   // Redirect to login if no user data exists
   if (!user) {
-    throw redirect(303, "/login");
+    throw redirect(303, "/auth/login");
   }
 
   return {

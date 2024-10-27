@@ -8,7 +8,7 @@
 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
     {#each games as game}
         <Block
-            className="hover:bg-lkai/10 transition-all duration-500 hover:duration-150 hover:border-white/25"
+            className="hover:bg-lkai/10 hover:scale-[100.5%] transform transition-all duration-600 hover:duration-250 hover:border-white/25"
         >
             <div class="flex flex-col h-full">
                 <div class="aspect-w-16 aspect-h-9 bg-sl/20 rounded-t-lg">

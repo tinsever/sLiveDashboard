@@ -35,7 +35,7 @@
                 </button>
             {/if}
         </div>
-        <div class="pt-6 text-white/50">
+        <div class="pt-6 text-white/50 fill-white/50">
             <NavComponent
                 icon="home"
                 path="/dashboard"
