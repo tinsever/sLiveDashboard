@@ -6,6 +6,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>sLive | Oops!</title>
+</svelte:head>
+
 <div id="errorpage">
     <img src="/logo.png" alt="SLIVE Logo" class="w-auto h-56" />
     <div id="infotext">
