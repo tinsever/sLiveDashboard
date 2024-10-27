@@ -51,7 +51,7 @@
             imageUrl={imgUrl}
             status={data.data.twitch.stream.status}
         />
-        <div class="min-h-full overflow-auto p-6">
+        <div class="overflow-auto p-6">
             {@render children()}
         </div>
     </div>

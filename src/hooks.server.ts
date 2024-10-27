@@ -2,8 +2,8 @@
 import type { Handle } from "@sveltejs/kit";
 import { API_URL } from "$env/static/private";
 
-const api = (authToken) => {
-  const fetchFromAPI = async (endpoint) => {
+const api = (authToken: string) => {
+  const fetchFromAPI = async (endpoint: string) => {
     try {
       const response = await fetch(`${API_URL}${endpoint}`, {
         headers: {
@@ -25,6 +25,25 @@ const api = (authToken) => {
   };
 
   return {
+    validateToken: async () => {
+      try {
+        const response = await fetch(`${API_URL}/auth/validate`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.status === 200) {
+          return true; // Token is valid
+        } else if (response.status === 401) {
+          return false; // Token is invalid
+        }
+      } catch (err) {
+        console.error(`Failed to validate token:`, err);
+      }
+      return false; // Treat errors as invalid token
+    },
     me: () => fetchFromAPI("/me"),
     games: () => fetchFromAPI("/games"),
   };
@@ -36,14 +55,24 @@ export const handle: Handle = async ({ event, resolve }) => {
   if (authToken) {
     const api_client = api(authToken);
 
-    // Get whatever data we can, ignore errors
-    const [userData, gamesData] = await Promise.all([
-      api_client.me(),
-      api_client.games(),
-    ]);
+    // Validate token by status code
+    const isValidToken = await api_client.validateToken();
 
-    event.locals.user = userData?.data || null;
-    event.locals.games = gamesData?.data?.games || [];
+    if (isValidToken) {
+      // Token is valid, proceed to fetch user data
+      const [userData, gamesData] = await Promise.all([
+        api_client.me(),
+        api_client.games(),
+      ]);
+
+      event.locals.user = userData?.data || null;
+      event.locals.games = gamesData?.data?.games || [];
+    } else {
+      // Token is invalid, clear cookies and session data
+      event.cookies.delete("authToken", { path: "/" });
+      event.locals.user = null;
+      event.locals.games = [];
+    }
   }
 
   const response = await resolve(event);

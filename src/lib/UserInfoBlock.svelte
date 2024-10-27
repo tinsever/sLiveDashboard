@@ -4,7 +4,10 @@
     import Icons from "./Icons.svelte";
 </script>
 
-<Block flex={true} className="p-4">
+<Block
+    flex={true}
+    className="p-4 hover:bg-lkai/10 transition-all duration-500 hover:duration-150 hover:border-white/25"
+>
     <img
         src={user.twitch.user.pb}
         alt="Profilepicture"
