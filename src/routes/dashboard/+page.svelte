@@ -1,13 +1,15 @@
-<script>
-    import InnerNav from "$lib/InnerNav.svelte";
-    import Icons from "$lib/Icons.svelte";
+<script lang="ts">
+    import GamesOverview from "$lib/GamesOverview.svelte";
     import UserInfoBlock from "$lib/UserInfoBlock.svelte";
+    let { data } = $props();
 
-    export let data; // Benutzerdaten von der Server-Seite
+    const user = data.user;
+    const games = data.games;
 </script>
 
 <svelte:head>
     <title>sLive | Dash</title>
 </svelte:head>
 
-<UserInfoBlock {data} />
+<UserInfoBlock {user} />
+<GamesOverview {games} />

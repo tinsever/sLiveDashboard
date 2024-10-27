@@ -1,46 +1,51 @@
 // src/hooks.server.ts
 import type { Handle } from "@sveltejs/kit";
-import { error } from "@sveltejs/kit";
 import { API_URL } from "$env/static/private";
 
-export const handle: Handle = async ({ event, resolve }) => {
-  // Retrieve the auth token from cookies, if it exists
-  const authToken = event.cookies.get("authToken");
-  event.locals.authToken = authToken || null; // Attach the auth token to locals
-
-  // Fetch user data if the token exists
-  if (authToken) {
+const api = (authToken) => {
+  const fetchFromAPI = async (endpoint) => {
     try {
-      const response = await fetch(API_URL + "/me", {
-        method: "GET",
+      const response = await fetch(`${API_URL}${endpoint}`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
         },
       });
 
-      // Check if the response is successful
       if (!response.ok) {
-        throw error(401, "Unauthorized access to user data.");
+        console.error(`API error ${endpoint}:`, response.statusText);
+        return null;
       }
 
-      const data = JSON.parse(await response.text());
-
-      // Ensure the data structure is as expected
-      if (!data || !data.data) {
-        throw error(500, "Unexpected data format received.");
-      }
-
-      // Attach user data to locals
-      event.locals.user = data.data; // Set user data here
+      return await response.json();
     } catch (err) {
-      console.error("Error while fetching user data:", err);
-      event.locals.user = null; // Set to null if there's an error
+      console.error(`Failed fetching ${endpoint}:`, err);
+      return null;
     }
-  } else {
-    event.locals.user = null; // No token, set user to null
+  };
+
+  return {
+    me: () => fetchFromAPI("/me"),
+    games: () => fetchFromAPI("/games"),
+  };
+};
+
+export const handle: Handle = async ({ event, resolve }) => {
+  const authToken = event.cookies.get("authToken");
+
+  if (authToken) {
+    const api_client = api(authToken);
+
+    // Get whatever data we can, ignore errors
+    const [userData, gamesData] = await Promise.all([
+      api_client.me(),
+      api_client.games(),
+    ]);
+
+    event.locals.user = userData?.data || null;
+    event.locals.games = gamesData?.data?.games || [];
   }
 
-  // Continue processing the request
   const response = await resolve(event);
   return response;
 };

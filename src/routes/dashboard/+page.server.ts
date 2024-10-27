@@ -2,14 +2,15 @@
 import { error, redirect } from "@sveltejs/kit";
 
 export async function load({ locals }) {
-  const userInfo = locals.user; // Access user data from locals
+  const { user, games } = locals;
 
-  // Redirect to login if no token exists
-  if (!userInfo) {
+  // Redirect to login if no user data exists
+  if (!user) {
     throw redirect(303, "/login");
   }
 
   return {
-    data: userInfo, // This can be used in your Svelte components
+    user: user,
+    games: games,
   };
 }
